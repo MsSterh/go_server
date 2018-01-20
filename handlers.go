@@ -2,11 +2,10 @@ package main
 
 import (
   "encoding/json"
-  "fmt"
   "net/http"
   "io"
   "io/ioutil"
-
+  "strconv"
   "github.com/gorilla/mux"
 )
 
@@ -31,12 +30,16 @@ func AllRecordsShow(w http.ResponseWriter, r *http.Request) {
 func LastBlockShow(w http.ResponseWriter, r *http.Request) {
   vars := mux.Vars(r)
   blockId := vars["blockId"]
-  fmt.Fprintln(w, "Last block show:", blockId)
+  blockIdInt, err := strconv.Atoi(blockId)
+
+  if err == nil {
+    panic(err)
+  }
 
   w.Header().Set("Content-Type", "application/json; charset=UTF-8")
   w.WriteHeader(http.StatusOK)
 
-  if err := json.NewEncoder(w).Encode(todos); err != nil {
+  if err := json.NewEncoder(w).Encode(blocks[blockIdInt]); err != nil {
     panic(err)
   }
 }
