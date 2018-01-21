@@ -31,9 +31,9 @@ var routes = Routes{
     AddData,
   },
   Route{
-    "LastBlock",
+    "LastBlocks",
     "GET",
     "/last_blocks/{blockId}",
-    LastBlockShow,
+    LastBlocksShow,
   },
 }

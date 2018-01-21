@@ -13,11 +13,11 @@ var blocks Blocks
 const Dimension = 5
 
 // Give us some seed data
-func init() {
-  RepoCreateRecord(Record{Data: "First transaction"})
-  RepoCreateRecord(Record{Data: "Second transaction"})
-  RepoCreateRecord(Record{Data: "Third transaction"})
-}
+// func init() {
+//   RepoCreateRecord(Record{Data: "First transaction"})
+//   RepoCreateRecord(Record{Data: "Second transaction"})
+//   RepoCreateRecord(Record{Data: "Third transaction"})
+// }
 
 func CalculatePrevHash() string {
   if len(blocks) > 0 {
@@ -37,13 +37,10 @@ func CalculateRows() Records {
 
 func CalculateBlockHash(prevHash string, rows Records, timestamp int64) string {
   hasher := sha256.New()
-
   hasher.Write([]byte(prevHash))
-
   for _, row := range rows {
     hasher.Write([]byte(row.Data))
   }
-
   hasher.Write([]byte(strconv.FormatInt(timestamp, 10)))
 
   return hex.EncodeToString(hasher.Sum(nil))
