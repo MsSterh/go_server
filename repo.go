@@ -31,15 +31,19 @@ func CalculateTimestamp() int64 {
   return time.Now().Unix()
 }
 
-func CalculateRows() Records {
-  return records[len(records) - Dimension:]
+func CalculateRows() Rows {
+  var row Rows
+  for _, r := range records[len(records) - Dimension:] {
+    row = append(row, r.Data)
+  }
+  return row
 }
 
-func CalculateBlockHash(prevHash string, rows Records, timestamp int64) string {
+func CalculateBlockHash(prevHash string, rows Rows, timestamp int64) string {
   hasher := sha256.New()
   hasher.Write([]byte(prevHash))
   for _, row := range rows {
-    hasher.Write([]byte(row.Data))
+    hasher.Write([]byte(row))
   }
   hasher.Write([]byte(strconv.FormatInt(timestamp, 10)))
 
