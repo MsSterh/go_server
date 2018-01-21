@@ -23,7 +23,7 @@ Block is forming when server gets 5 records:
 <pre><code>{
   // string of previous block hash or '0' for the first block
   previous_block_hash: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08',
-  // array of 5 records
+  // array of 5 records data
   rows: ['data1','data2','data3','data4','data5'],
   // current timestamp
   timestamp: 12123889,
